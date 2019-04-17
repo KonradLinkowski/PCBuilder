@@ -3,6 +3,10 @@ const axios = require('axios')
 const { getLink, processItem } = require('../utils/processItem')
 const router = require('express').Router()
 
+if (!process.env.CLIENT_ID || !process.env.CLIENT_SECRET) {
+  throw new Error('Please set CLIENT_ID and CLIENT_SECRET env variables.')
+}
+
 router.get('/', ensureToken, async (req, res) => {
   res.json(req.token.access_token)
 })
